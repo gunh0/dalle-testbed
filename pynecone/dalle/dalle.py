@@ -16,11 +16,18 @@ class State(pc.State):
     """The app state."""
 
     prompt = ""
-    image_url = ""
+    image_url0 = ""
+    image_url1 = ""
+    image_url2 = ""
+    image_url3 = ""
+    image_url4 = ""
+    image_url5 = ""
+    image_url6 = ""
+    image_url7 = ""
     image_processing = False
     image_made = False
 
-    def process_image(self):
+    def on_process(self):
         """Set the image processing flag to true and indicate that the image has not been made yet."""
         self.image_made = False
         self.image_processing = True
@@ -28,8 +35,16 @@ class State(pc.State):
     def get_image(self):
         """Get the image from the prompt."""
         try:
-            response = openai.Image.create(prompt=self.prompt, n=1, size="256x256")
-            self.image_url = response["data"][0]["url"]
+            response = openai.Image.create(prompt=self.prompt, n=8, size="256x256")
+            self.image_url0 = response["data"][0]["url"]
+            self.image_url1 = response["data"][1]["url"]
+            self.image_url2 = response["data"][2]["url"]
+            self.image_url3 = response["data"][3]["url"]
+            self.image_url4 = response["data"][4]["url"]
+            self.image_url5 = response["data"][5]["url"]
+            self.image_url6 = response["data"][6]["url"]
+            self.image_url7 = response["data"][7]["url"]
+
             # Set the image processing flag to false and indicate that the image has been made.
             self.image_processing = False
             self.image_made = True
@@ -45,19 +60,59 @@ def index():
             pc.input(placeholder="Enter a prompt..", on_blur=State.set_prompt),
             pc.button(
                 "Generate Image",
-                on_click=[State.process_image, State.get_image],
                 width="100%",
+                on_click=[State.on_process, State.get_image],
             ),
             pc.divider(),
             pc.cond(
-                State.image_processing,
-                pc.circular_progress(is_indeterminate=True),
-                pc.cond(
-                    State.image_made,
-                    pc.image(
-                        src=State.image_url,
-                        height="25em",
-                        width="25em",
+                State.image_processing, pc.circular_progress(is_indeterminate=True)
+            ),
+            pc.cond(
+                State.image_made,
+                pc.vstack(
+                    pc.hstack(
+                        pc.image(
+                            src=State.image_url0,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url1,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url2,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url3,
+                            height="10em",
+                            width="10em",
+                        ),
+                    ),
+                    pc.hstack(
+                        pc.image(
+                            src=State.image_url4,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url5,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url6,
+                            height="10em",
+                            width="10em",
+                        ),
+                        pc.image(
+                            src=State.image_url7,
+                            height="10em",
+                            width="10em",
+                        ),
                     ),
                 ),
             ),
