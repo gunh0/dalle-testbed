@@ -1,4 +1,4 @@
-# DALL-E testbed
+# DALL-E Testbed
 
 > This app uses the OpenAI DALL-E API to generate images from prompts. The code uses the Pynecone library, which is built on top of Flask and React.
 

@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+    pynecone-dall-e:
+        build: .
+        container_name: pynecone-dall-e
+        ports:
+            - "1234:3000"
