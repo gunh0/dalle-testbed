@@ -1,0 +1,2 @@
+pc init
+pc run
