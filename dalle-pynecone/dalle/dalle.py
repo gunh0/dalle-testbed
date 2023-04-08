@@ -3,12 +3,16 @@ from pcconfig import config
 from dotenv import dotenv_values
 
 import openai
+import os
 import pynecone as pc
 
 docs_url = "https://pynecone.io/docs/getting-started/introduction"
 filename = f"{config.app_name}/{config.app_name}.py"
 
-config = dotenv_values("../.env")
+config = dotenv_values(
+    os.path.join(os.path.dirname(os.path.realpath(__file__)), "../.env")
+)
+print(f"[check your api key] : {config}")
 openai.api_key = config["OPENAI_API_KEY"]
 
 
