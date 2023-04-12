@@ -27,14 +27,6 @@ OPENAI_API_KEY=""
 
 <br/>
 
-### Running
-
-```bash
-docker-compose up
-```
-
-<br/>
-
 ### References
 
 -   Pynecone documentation : https://pynecone.io/docs/getting-started/introduction
